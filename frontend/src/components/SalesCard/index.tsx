@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from "react-toastify";
 import { Sale } from "../../models/sale";
 import { BASE_URL } from "../../utils/request";
 
@@ -29,9 +30,12 @@ function SalesCard() {
 
         axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
-                setSales(response.data.content);
+                setSales(response.data.content),
+                toast.info("Data alterada com sucesso");;
+                
             })
-    }, [minDate, maxDate]);
+    }, [minDate, maxDate]
+    );
 
 
     return (
